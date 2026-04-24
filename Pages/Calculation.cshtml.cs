@@ -16,72 +16,78 @@ public class CalculationModel : PageModel
     double bouteille = 6.5 * verre;
 
     // Cocktail Mousseux Rosé :
-
     // Partir sur 3 verres d’alcool par personne
-    //  (Mousseux : 6.5 verres dans 1 bouteille)
 
     int cocktailVerres = 3 * paxCocktail;
     double cocktailBtlles = cocktailVerres / bouteille;
 
-
     // Rosé 20 % de cocktailBtlles
     double roseBtlles = (double)(20 * cocktailBtlles) / 100;
-
-
     int cocktailMousseux = (int)(cocktailBtlles - roseBtlles);
-    // prendre un carton au dessus si le remainder est de 3 mini + 1 carton d'alerte
-    double cocktailMousseuxCarton = (cocktailBtlles / 6) + 1;
-    if (cocktailBtlles % 6 >= 3)
+    double cocktailMousseuxCarton = cocktailMousseux / 6;
+    // prendre un carton au dessus si le remainder est de 1 
+    if (cocktailMousseux % 6 >= 1)
     {
       cocktailMousseuxCarton++;
     }
     double roseCarton = roseBtlles / 6;
-    Console.WriteLine("Nombre de carton de Mousseux pour le cocktail : " + Math.Floor(cocktailMousseuxCarton));
-    Console.WriteLine("Nombre de carton de Rosé pour le cocktail : " + Math.Floor(roseBtlles / 6));
+    if (roseCarton % 6 >= 1)
+    {
+      roseCarton++;
+    }
 
     ResultatCocktail =
-    $"Il faut {Math.Floor(cocktailBtlles)} bouteilles de mousseux dont {Math.Floor(roseBtlles)} de rosé pour le cocktail\n" +
-    $"Nombre de cartons de Mousseux pour le cocktail : {Math.Floor(cocktailMousseuxCarton)}\n" +
-    $"Nombre de cartons de Rosé pour le cocktail : {Math.Floor(roseCarton)}";
-    // Diner Rouge Blanc
+    $"Minimum :  {cocktailMousseux} bouteilles de mousseux et {Math.Floor(roseBtlles)} de rosé pour le cocktail.\n\n" +
+    $"Nombre de cartons de Mousseux pour le cocktail : {Math.Ceiling(cocktailMousseuxCarton)}\n" +
+    $"Nombre de cartons de Rosé pour le cocktail : {Math.Ceiling(roseCarton)}";
 
-    // Partir sur 1 bttle de vin pour 3 personnes 
+    // Diner Rouge Blanc
+    // Partir sur 1 bttle de vin pour 3 personnes. 
     // Bulles pour le dessert : compter 1 bouteille pour 6 personnes
 
     // vins :
 
     int dinerBtlles = paxDiner / 3;
     int dessertBtlles = paxDiner / 6;
-    Console.WriteLine($" vins au repas {dinerBtlles} bouteilles et mousseux pour dessert {dessertBtlles} bouteilles pour {paxDiner} personnes.");
-
-    // prendre un carton au dessus si le remainder est de 3  + 1 carton d'alerte
-    double dinerCarton = (dinerBtlles / 6) + 1;
-    if (dinerBtlles % 6 >= 3)
+    // prendre un carton au dessus si le remainder est de 1  
+    double dinerCarton = (dinerBtlles / 6);
+    if (dinerBtlles % 6 >= 1)
     {
       dinerCarton++;
     }
 
-    Console.WriteLine("Nombre de carton pour le repas : " + dinerCarton + " , cartons par couleur :");
-    // 100 = 50 % rouge + 20% Blanc sec + 10% blanc fruité
+    // 100 = 50 % rouge + 30% Blanc sec + 20% blanc fruité
     // Nombre de carton de vins rouges :
     double rougeCarton = (double)(50 * dinerCarton) / 100;
-    Console.WriteLine("\tCartons de rouge : " + Math.Ceiling(rougeCarton));
     // Nombre de carton de vins blancs :
     double blancCarton = (double)(30 * dinerCarton) / 100;
-    Console.WriteLine("\tCartons de blanc sec : " + Math.Ceiling(blancCarton));
     // Nombre de carton de vins blancs fruités :
     double blancFruiteCarton = (double)(20 * dinerCarton) / 100;
-    Console.WriteLine("\tCartons de blanc fruités : " + Math.Ceiling(blancFruiteCarton));
-
-
 
     double dessertCarton = dessertBtlles / 6;
-    if (dessertBtlles % 6 >= 3)
+    if (dessertBtlles % 6 >= 1)
     {
       dessertCarton++;
     }
-    Console.WriteLine("Cartons de mousseux pour le dessert : " + dessertCarton);
-    Console.WriteLine("Total de cartons de mousseux : " + Math.Round(dessertCarton + cocktailMousseuxCarton));
+    if (blancFruiteCarton <= 1)
+    {
+      blancFruiteCarton++;
+    }
+    double mousseuxCarton = cocktailMousseuxCarton + dessertCarton;
+    ResultatDiner =
+    $"Minimum : {dinerBtlles} bouteilles pour l'entrée/plat et {dessertBtlles} pour le dessert.\n\n" +
+    $"Nombre de cartons de blanc sec : {Math.Ceiling(blancCarton)}\n" +
+    $"Nombre de cartons de blanc fruité : {Math.Ceiling(blancFruiteCarton)}\n" +
+    $"Nombre de cartons de rouge : {Math.Ceiling(rougeCarton)}\n\n" +
+    $"Nombre de cartons de mousseux(dessert) : {Math.Ceiling(dessertCarton)}";
+
+    ResultatTotal =
+    $"Cartons de mousseux : {Math.Ceiling(mousseuxCarton)}\n" +
+    $"Cartons de rosé : {Math.Ceiling(roseCarton)}\n" +
+    $"Cartons de blanc sec : {Math.Ceiling(blancCarton)}\n" +
+    $"Cartons de blanc fruité : {Math.Ceiling(blancFruiteCarton)}\n" +
+    $"Cartons de rouge : {Math.Ceiling(rougeCarton)}\n\n" +
+    $"Cartons : {Math.Ceiling(mousseuxCarton) + Math.Ceiling(roseCarton) + Math.Ceiling(blancCarton) + Math.Ceiling(blancFruiteCarton) + Math.Ceiling(rougeCarton)}";
 
   }
 }
