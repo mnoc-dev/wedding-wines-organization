@@ -1,5 +1,4 @@
-GMLVCJKOJEAA-aREBhRxZx8YMOkPRumL264YlxVpKqPMV02IYTXNRWkNE2zTT
-
+dezdqs
 curl -H "Authorization: Bearer TOKEN" \
      https://api.grapeminds.eu/public/v1/wines
 Arrays?
