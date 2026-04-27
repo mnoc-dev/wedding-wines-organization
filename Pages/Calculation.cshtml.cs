@@ -12,13 +12,12 @@ public class CalculationModel : PageModel
   {
     int paxCocktail = 80;
     int paxDiner = 70;
-    int verre = 1;
-    double bouteille = 6.5 * verre;
+    double bouteille = 6.5;
 
     // Cocktail Mousseux Rosé :
-    // Partir sur 3 verres d’alcool par personne
+    // Partir sur 2 verres d’alcool par personne
 
-    int cocktailVerres = 3 * paxCocktail;
+    int cocktailVerres = 2 * paxCocktail;
     double cocktailBtlles = cocktailVerres / bouteille;
 
     // Rosé 20 % de cocktailBtlles
@@ -31,13 +30,14 @@ public class CalculationModel : PageModel
       cocktailMousseuxCarton++;
     }
     double roseCarton = roseBtlles / 6;
-    if (roseCarton % 6 >= 1)
-    {
-      roseCarton++;
-    }
 
+    if (roseBtlles < 6)
+    {
+      roseCarton = 1;
+    }
     ResultatCocktail =
     $"Minimum :  {cocktailMousseux} bouteilles de mousseux et {Math.Floor(roseBtlles)} de rosé pour le cocktail.\n\n" +
+    $"Bouteilles de vin prévues {cocktailMousseuxCarton * 6} Mousseux {roseCarton * 6}\n" +
     $"Nombre de cartons de Mousseux pour le cocktail : {Math.Ceiling(cocktailMousseuxCarton)}\n" +
     $"Nombre de cartons de Rosé pour le cocktail : {Math.Ceiling(roseCarton)}";
 
@@ -58,24 +58,22 @@ public class CalculationModel : PageModel
 
     // 100 = 50 % rouge + 30% Blanc sec + 20% blanc fruité
     // Nombre de carton de vins rouges :
-    double rougeCarton = (double)(50 * dinerCarton) / 100;
+    double rougeCarton = (double)(60 * dinerCarton) / 100;
     // Nombre de carton de vins blancs :
-    double blancCarton = (double)(30 * dinerCarton) / 100;
+    double blancCarton = (double)(20 * dinerCarton) / 100;
     // Nombre de carton de vins blancs fruités :
     double blancFruiteCarton = (double)(20 * dinerCarton) / 100;
 
     double dessertCarton = dessertBtlles / 6;
-    if (dessertBtlles % 6 >= 1)
+
+    if (blancCarton <= 1)
     {
-      dessertCarton++;
-    }
-    if (blancFruiteCarton <= 1)
-    {
-      blancFruiteCarton++;
+      blancCarton++;
     }
     double mousseuxCarton = cocktailMousseuxCarton + dessertCarton;
     ResultatDiner =
     $"Minimum : {dinerBtlles} bouteilles pour l'entrée/plat et {dessertBtlles} pour le dessert.\n\n" +
+    $"Bouteilles de vin prévues : {Math.Round(blancCarton * 6)} Blanc {Math.Round(blancFruiteCarton * 6)} Blanc fruité {Math.Round(rougeCarton * 6)} Rouge\n" +
     $"Nombre de cartons de blanc sec : {Math.Ceiling(blancCarton)}\n" +
     $"Nombre de cartons de blanc fruité : {Math.Ceiling(blancFruiteCarton)}\n" +
     $"Nombre de cartons de rouge : {Math.Ceiling(rougeCarton)}\n\n" +
@@ -87,7 +85,11 @@ public class CalculationModel : PageModel
     $"Cartons de blanc sec : {Math.Ceiling(blancCarton)}\n" +
     $"Cartons de blanc fruité : {Math.Ceiling(blancFruiteCarton)}\n" +
     $"Cartons de rouge : {Math.Ceiling(rougeCarton)}\n\n" +
-    $"Cartons : {Math.Ceiling(mousseuxCarton) + Math.Ceiling(roseCarton) + Math.Ceiling(blancCarton) + Math.Ceiling(blancFruiteCarton) + Math.Ceiling(rougeCarton)}";
+    $"Cartons : {Math.Ceiling(mousseuxCarton) + Math.Ceiling(roseCarton) + Math.Ceiling(blancCarton) + Math.Ceiling(blancFruiteCarton) + Math.Ceiling(rougeCarton)}\n" +
+    $"Bouteilles :{(Math.Ceiling(mousseuxCarton) + Math.Ceiling(roseCarton) + Math.Ceiling(blancCarton) + Math.Ceiling(blancFruiteCarton) + Math.Ceiling(rougeCarton)) * 6}";
 
   }
 }
+
+
+// ajouter un budget si x > y ? ok : hors-budget

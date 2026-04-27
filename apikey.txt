@@ -1,0 +1,81 @@
+GMLVCJKOJEAA-aREBhRxZx8YMOkPRumL264YlxVpKqPMV02IYTXNRWkNE2zTT
+
+curl -H "Authorization: Bearer GMLVCJKOJEAA-aREBhRxZx8YMOkPRumL264YlxVpKqPMV02IYTXNRWkNE2zTT" \
+     https://api.grapeminds.eu/public/v1/wines
+
+     🧂 Intensité
+Léger
+Délicat
+Subtil
+Intense
+Puissant
+Riche
+🧈 Texture / matière
+Gras
+Onctueux
+Crémeux
+Sec
+Juteux
+Fondant
+Croquant
+🍋 Acidité / fraîcheur
+Vif
+Acidulé
+Frais
+Plat
+Mou
+🧂 Salinité
+Salé
+Iodé
+Minéral
+🍯 Sucré
+Sec
+Légèrement sucré
+Sucré
+Caramélisé
+🔥 Cuisson / goût dominant
+Grillé
+Rôti
+Fumé
+Cru
+Confît
+Épicé
+Toasté
+🌿 Arômes
+Herbacé
+Fruité
+Floral
+Épicé
+Boisé
+Terreux
+Marin
+🍷 2. Décrire le VIN
+💥 Structure
+Léger / puissant
+Structuré
+Rond
+Aérien
+🍋 Acidité
+Vif
+Tendu
+Frais
+Mou
+🪵 Tanins (rouge)
+Souples
+Fondus
+Fermes
+Astringents
+🍯 Sucre
+Sec
+Demi-sec
+Moelleux
+Liquoreux
+🌸 Arômes
+Fruits rouges
+Fruits noirs
+Agrumes
+Fruits exotiques
+Floral
+Épicé
+Boisé
+Minéral
