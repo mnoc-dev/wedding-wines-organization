@@ -1,8 +1,8 @@
 GMLVCJKOJEAA-aREBhRxZx8YMOkPRumL264YlxVpKqPMV02IYTXNRWkNE2zTT
 
-curl -H "Authorization: Bearer GMLVCJKOJEAA-aREBhRxZx8YMOkPRumL264YlxVpKqPMV02IYTXNRWkNE2zTT" \
+curl -H "Authorization: Bearer TOKEN" \
      https://api.grapeminds.eu/public/v1/wines
-
+Arrays?
      🧂 Intensité
 Léger
 Délicat
